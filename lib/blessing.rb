@@ -12,7 +12,6 @@ module Blessing
 
     def self.is_blessed?(result)
         hash = self.hash_result result
-        puts "checking #{hash}"
         @@blessings[hash]
     end
 
