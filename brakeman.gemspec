@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Collins", "Luca Invernizzi"]
-  s.date = %q{2011-07-05}
+  s.date = %q{2011-07-06}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
   s.email = ["", "invernizzi.l@gmail.com"]
   s.executables = ["brakeman"]
@@ -72,7 +72,6 @@ Gem::Specification.new do |s|
     "lib/report.rb",
     "lib/scanner.rb",
     "lib/tasks/brakeman_tasks.rake",
-    "lib/tasks/template/blessed.rb",
     "lib/tracker.rb",
     "lib/util.rb",
     "lib/version.rb",
@@ -83,6 +82,62 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.7.2}
   s.summary = %q{Security vulnerability scanner for Ruby on Rails.}
+  s.test_files = [
+    "test/rails2/app/controllers/application_controller.rb",
+    "test/rails2/app/controllers/home_controller.rb",
+    "test/rails2/app/controllers/other_controller.rb",
+    "test/rails2/app/helpers/application_helper.rb",
+    "test/rails2/app/helpers/home_helper.rb",
+    "test/rails2/app/helpers/other_helper.rb",
+    "test/rails2/app/models/account.rb",
+    "test/rails2/app/models/user.rb",
+    "test/rails2/config/boot.rb",
+    "test/rails2/config/environment.rb",
+    "test/rails2/config/environments/development.rb",
+    "test/rails2/config/environments/production.rb",
+    "test/rails2/config/environments/test.rb",
+    "test/rails2/config/initializers/backtrace_silencers.rb",
+    "test/rails2/config/initializers/cookie_verification_secret.rb",
+    "test/rails2/config/initializers/inflections.rb",
+    "test/rails2/config/initializers/mime_types.rb",
+    "test/rails2/config/initializers/new_rails_defaults.rb",
+    "test/rails2/config/initializers/security_defaults.rb",
+    "test/rails2/config/initializers/session_store.rb",
+    "test/rails2/config/routes.rb",
+    "test/rails2/db/migrate/20110520193611_create_users.rb",
+    "test/rails2/db/migrate/20110523184125_create_accounts.rb",
+    "test/rails2/db/seeds.rb",
+    "test/rails2/test/functional/home_controller_test.rb",
+    "test/rails2/test/functional/other_controller_test.rb",
+    "test/rails2/test/performance/browsing_test.rb",
+    "test/rails2/test/test_helper.rb",
+    "test/rails2/test/unit/account_test.rb",
+    "test/rails2/test/unit/helpers/home_helper_test.rb",
+    "test/rails2/test/unit/helpers/other_helper_test.rb",
+    "test/rails2/test/unit/user_test.rb",
+    "test/rails3/app/controllers/application_controller.rb",
+    "test/rails3/app/controllers/home_controller.rb",
+    "test/rails3/app/helpers/application_helper.rb",
+    "test/rails3/app/helpers/home_helper.rb",
+    "test/rails3/config/application.rb",
+    "test/rails3/config/boot.rb",
+    "test/rails3/config/environment.rb",
+    "test/rails3/config/environments/development.rb",
+    "test/rails3/config/environments/production.rb",
+    "test/rails3/config/environments/test.rb",
+    "test/rails3/config/initializers/backtrace_silencers.rb",
+    "test/rails3/config/initializers/inflections.rb",
+    "test/rails3/config/initializers/mime_types.rb",
+    "test/rails3/config/initializers/secret_token.rb",
+    "test/rails3/config/initializers/session_store.rb",
+    "test/rails3/config/routes.rb",
+    "test/rails3/db/seeds.rb",
+    "test/rails3/test/functional/home_controller_test.rb",
+    "test/rails3/test/performance/browsing_test.rb",
+    "test/rails3/test/test_helper.rb",
+    "test/rails3/test/unit/helpers/home_helper_test.rb",
+    "test/test.rb"
+  ]
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
