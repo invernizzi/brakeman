@@ -6,7 +6,7 @@ module Blessing
     @@WHOLE_LINE_COMMENTS = {:ruby => /^(?:\s*)#.+$/,
                              :haml => /^(?:\s*)<!--.+-->$/,
                              :erb => /^(?:\s*)<!--.+-->$/}
-    @@HASH_IN_COMMENT = /(?:^|[^\w]|\s+)\w{32}(?:\s+|[^\w]|$)/
+    @@HASH_IN_COMMENT = /(?:^|\W)([a-z0-9]{32})(?:\W|$)/
 
     @@blessings = Hash.new
 
@@ -27,7 +27,7 @@ module Blessing
       comments = string.scan @@WHOLE_LINE_COMMENTS[language]
       comments.each do |comment|
         comment.scan(@@HASH_IN_COMMENT) do |blessing_hash|
-          Blessing.add_blessing blessing_hash.strip
+          Blessing.add_blessing blessing_hash[0].strip
         end
       end
     end
