@@ -47,7 +47,7 @@ namespace :brakeman do
   desc "Run Brakeman's tests and open results in your browser."
   task :report_browser do
     begin
-        Rake::Task['brakeman:test'].invoke
+        Rake::Task['brakeman:report'].invoke
     rescue Exception
     end
     #open the browser
