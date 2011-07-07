@@ -70,9 +70,9 @@ class Scanner
     begin
       yield RubyParser.new.parse(content), file
     rescue Racc::ParseError => e
-      tracker.error e, "could not parse #{f}"
+      tracker.error e, "could not parse #{file}"
     rescue Exception => e
-      tracker.error e.exception(e.message + "\nWhile processing #{f}"), e.backtrace
+      tracker.error e.exception(e.message + "\nWhile processing #{file}"), e.backtrace
     end
     return true
   end
