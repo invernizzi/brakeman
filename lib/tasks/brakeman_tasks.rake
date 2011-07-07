@@ -2,27 +2,26 @@ require 'rake'
 require 'brakeman'
 
 namespace :brakeman do
-
-  OUTPUT_DIR = "tmp/brakeman"
+  ROOT_APP_DIR = ::Rails.root.to_s
+  OUTPUT_DIR = File.join(ROOT_APP_DIR, "tmp/brakeman")
   OUTPUT_FILE = File.join(OUTPUT_DIR, "index.html")
-  TEST_DIR = "test/brakeman"
+  TEST_DIR = File.join(ROOT_APP_DIR, "test/brakeman")
 
 
   def brakeman_run(options={})
-      options[:app_path] = ::Rails.root.to_s unless options.has_key? :app_path
-      puts options[:app_path]
-      Brakeman.main options
+    options[:app_path] = ROOT_APP_DIR unless options.has_key? :app_path
+    Brakeman.main options
   end
 
 
 
   desc "Run Brakeman's tests."
   task :test do
-      warnings_num = brakeman_run
-      if warnings_num > 0
-          puts "Brakeman found #{warnings_num} potential issues. An exception will now be raised, for continuous integration."
-          raise Exception
-      end
+    warnings_num = brakeman_run
+    if warnings_num > 0
+      puts "Brakeman found #{warnings_num} potential issues. An exception will now be raised, for continuous integration."
+      raise Exception
+    end
   end
 
 
@@ -47,7 +46,7 @@ namespace :brakeman do
   desc "Run Brakeman's tests and open results in your browser."
   task :report_browser do
     begin
-        Rake::Task['brakeman:report'].invoke
+      Rake::Task['brakeman:report'].invoke
     rescue Exception
     end
     #open the browser
