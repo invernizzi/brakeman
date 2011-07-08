@@ -14,6 +14,7 @@ class CheckModelAttributes < BaseCheck
     names = []
 
     tracker.models.each do |name, model|
+      next if model[:attributes].size == 0
       if model[:attr_accessible].nil? and parent? tracker, model, :"ActiveRecord::Base"
         if OPTIONS[:collapse_mass_assignment]
           names << name.to_s
