@@ -8,21 +8,21 @@ module WarningTypes
 "Cross Site Scripting" => <<-HTML
 Cross site scripting warnings are raised when a parameter or model attribute is output through a view without being escaped.
 
-See http://guides.rubyonrails.org/security.html#cross-site-scripting-xss for details.
+See <a href="http://guides.rubyonrails.org/security.html#cross-site-scripting-xss">http://guides.rubyonrails.org/security.html#cross-site-scripting-xss</a> for details.
 HTML
     }
     self.description["SQL Injection"] =<<-HTML
 
 String interpolation or concatenation has been detected in an SQL query. Use parameterized queries instead.
 
-See http://guides.rubyonrails.org/security.html#sql-injection for details.
+See <a href="http://guides.rubyonrails.org/security.html#sql-injection">http://guides.rubyonrails.org/security.html#sql-injection</a> for details.
 
 HTML
     self.description["Command Injection"] =<<-HTML
 
 Request parameters or string interpolation has been detected in a `system` call. This can lead to someone executing arbitrary commands. Use the safe form of `system` instead, which will pass in arguments safely.
 
-See http://guides.rubyonrails.org/security.html#command-line-injection for details.
+See <a href="http://guides.rubyonrails.org/security.html#command-line-injection">http://guides.rubyonrails.org/security.html#command-line-injection</a> for details.
 
 HTML
     self.description["Mass Assignment"] =<<-HTML
@@ -31,7 +31,7 @@ Mass assignment is a method for initializing models. If the attributes which are
 
 Mass assignment can be disabled globally.
 
-Please see http://railspikes.com/2008/9/22/is-your-rails-application-safe-from-mass-assignment for more details.
+Please see <a href="http://railspikes.com/2008/9/22/is-your-rails-application-safe-from-mass-assignment">http://railspikes.com/2008/9/22/is-your-rails-application-safe-from-mass-assignment</a> for more details.
 
 HTML
     self.description["Attribute Restriction"] =<<-HTML
@@ -47,7 +47,7 @@ HTML
 
 No call to `protect_from_forgery` was found in `ApplicationController`. This method prevents CSRF.
 
-See http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf for details.
+See <a href="http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf">http://guides.rubyonrails.org/security.html#cross-site-request-forgery-csrf</a> for details.
 
 HTML
     self.description["Redirect"] =<<-HTML
@@ -56,7 +56,7 @@ Redirects which rely on user-supplied values can be used to "spoof" websites or 
 
 This warning is shown when request parameters are used inside a call to `redirect_to`.
 
-See http://www.owasp.org/index.php/Top_10_2010-A10 for more information.
+See <a href="http://www.owasp.org/index.php/Top_10_2010-A10">http://www.owasp.org/index.php/Top_10_2010-A10</a> for more information.
 
 HTML
     self.description["Default Routes"] =<<-HTML
@@ -72,7 +72,7 @@ HTML
 
 Calls to `validates_format_of ..., :with => //` which do not use `\A` and `\z` as anchors will cause this warning. Using `^` and `$` is not sufficient, as `$` will only match up to a new line. This allows an attacker to put whatever malicious input they would like after a new line character.
 
-See http://guides.rubyonrails.org/security.html#regular-expressions for details.
+See <a href="http://guides.rubyonrails.org/security.html#regular-expressions">http://guides.rubyonrails.org/security.html#regular-expressions</a> for details.
 
 HTML
     self.description["Dynamic Render Path"] =<<-HTML
