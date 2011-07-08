@@ -44,6 +44,11 @@ class Processor
     AliasProcessor.new.process result
   end
 
+  #Process the db migration files
+  def process_db src, file_name
+    DbProcessor.new(@tracker).process_db src, file_name
+  end
+
   #Process either an ERB or HAML template
   def process_template name, src, type, called_from = nil, file_name = nil
     case type

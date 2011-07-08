@@ -25,6 +25,7 @@ class ModelProcessor < BaseProcessor
       @model = { :name => class_name(exp[1]),
         :parent => class_name(exp[2]),
         :includes => [],
+        :attributes => [],
         :public => {},
         :private => {},
         :protected => {},

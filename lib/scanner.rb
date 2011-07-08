@@ -55,6 +55,8 @@ class Scanner
     process_models
     warn "Processing controllers..."
     process_controllers
+    warn "Processing db migration files..."
+    process_db
     tracker
   end
 
@@ -218,6 +220,17 @@ class Scanner
     Dir.glob(@app_path + "/models/*.rb").sort.each do |f|
       process_file f do |parsed, file|
         @processor.process_model(parsed, f)
+      end
+    end
+  end
+
+  #Process all the *_create*.rb files in db/migrate
+  #
+  #Adds the processed models to tracker.models
+  def process_db
+    Dir.glob(File.join(@app_path, "../db/migrate/*_create*.rb")).sort.each do |f|
+      process_file f do |parsed, file|
+        @processor.process_db(parsed, f)
       end
     end
   end

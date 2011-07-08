@@ -64,6 +64,7 @@ Gem::Specification.new do |s|
     "lib/processors/lib/route_helper.rb",
     "lib/processors/library_processor.rb",
     "lib/processors/model_processor.rb",
+    "lib/processors/db_processor.rb",
     "lib/processors/output_processor.rb",
     "lib/processors/params_processor.rb",
     "lib/processors/route_processor.rb",

@@ -29,6 +29,7 @@ class Tracker
     @models = { UNKNOWN_MODEL => { :name => UNKNOWN_MODEL,
         :parent => nil,
         :includes => [],
+        :attributes => [],
         :public => {},
         :private => {},
         :protected => {},
