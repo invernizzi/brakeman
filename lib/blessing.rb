@@ -3,9 +3,9 @@ require 'digest/md5'
 
 module Blessing
 
-    @@WHOLE_LINE_COMMENTS = {:ruby => /^(?:\s*)#.+$/,
-                             :haml => /^(?:\s*)<!--.+-->$/,
-                             :erb => /^(?:\s*)<!--.+-->$/}
+    @@WHOLE_LINE_COMMENTS = {:ruby => /^\s*#(.+)$/,
+                             :haml => /<%#([^%>]+)%>$/,
+                             :erb => /<%#([^%>]+)%>/}
     @@HASH_IN_COMMENT = /(?:^|\W)([a-z0-9]{32})(?:\W|$)/
 
     @@blessings = Hash.new
@@ -26,7 +26,7 @@ module Blessing
     def self.parse_string_for_blessings string, language=:ruby
       comments = string.scan @@WHOLE_LINE_COMMENTS[language]
       comments.each do |comment|
-        comment.scan(@@HASH_IN_COMMENT) do |blessing_hash|
+        comment[0].scan(@@HASH_IN_COMMENT) do |blessing_hash|
           Blessing.add_blessing blessing_hash[0].strip
         end
       end
