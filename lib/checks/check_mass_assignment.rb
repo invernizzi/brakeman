@@ -67,6 +67,15 @@ class CheckMassAssignment < BaseCheck
       #Still should probably check contents of hash
       false
     else
+      current_model = tracker.models[call[1][1]]
+      #we'll check all the parents to see if at least one is using
+      #attr_accessible.
+      while current_model[:parent] != :"ActiveRecord::Base" do
+        parent = tracker.models[current_model[:parent]]
+        #if at least one parent declares the accessible attributes, we are safe
+        return false unless parent[:attr_accessible].nil?
+        current_model = parent
+      end
       true
     end
   end
