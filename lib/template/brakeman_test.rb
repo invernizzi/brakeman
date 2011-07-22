@@ -7,6 +7,6 @@ class BrakemanTest < ActionController::IntegrationTest
     options = {:app_path => ::Rails.root.to_s,
             :output_file => File.join(::Rails.root.to_s, "tmp/brakeman/index.html")}
     #Make sure that no issue are found
-    assert_true Brakeman.main(options) == 0
+    assert Brakeman.main(options) == 0
   end
 end
