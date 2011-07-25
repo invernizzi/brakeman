@@ -74,8 +74,6 @@ class DbProcessor < BaseProcessor
 
   #Add method definition to tracker
   def process_defs exp
-    require 'rubygems'
-    require 'ruby-debug'
     name = exp[2]
     return exp unless name == :up
     body = exp[4][1]
