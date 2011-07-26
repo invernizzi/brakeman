@@ -1,5 +1,4 @@
 require "test_helper"
-require 'brakeman'
 
 class Brakeman::BrakemanTest < ActionController::IntegrationTest
 
