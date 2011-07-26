@@ -140,6 +140,7 @@ class Brakeman::Tracker
 
   #Returns a Report with this Tracker's information
   def report
+    require File.join File.expand_path(File.dirname(__FILE__)), "report"
     Brakeman::Report.new(self)
   end
 end
