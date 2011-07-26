@@ -2,7 +2,7 @@ require 'processors/lib/find_call'
 
 #This processor specifically looks for calls like
 # User.active.human.find(:all, :conditions => ...)
-class FindModelCall < FindCall
+class Brakeman::FindModelCall < Brakeman::FindCall
 
   #Passes +targets+ to FindCall
   def initialize targets

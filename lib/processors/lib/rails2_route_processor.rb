@@ -3,7 +3,7 @@ require 'processors/base_processor'
 #
 #Note that it is only interested in determining what methods on which
 #controllers are used as routes, not the generated URLs for routes.
-class RoutesProcessor < BaseProcessor
+class Brakeman::RoutesProcessor < Brakeman::BaseProcessor
   include RouteHelper
 
   attr_reader :map, :nested, :current_controller
@@ -22,7 +22,7 @@ class RoutesProcessor < BaseProcessor
   #This method first calls RouteAliasProcessor#process_safely on the +exp+,
   #so it does not modify the +exp+.
   def process_routes exp
-    process RouteAliasProcessor.new.process_safely(exp)
+    process Brakeman::RouteAliasProcessor.new.process_safely(exp)
   end
 
   #Looking for mapping of routes
@@ -273,7 +273,7 @@ end
 
 #This is for a really specific case where a hash is used as arguments
 #to one of the map methods.
-class RouteAliasProcessor < AliasProcessor
+class Brakeman::RouteAliasProcessor < Brakeman::AliasProcessor
   
   #This replaces
   # { :some => :hash }.keys

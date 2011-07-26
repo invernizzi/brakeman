@@ -3,8 +3,8 @@ require 'checks/base_check'
 #Checks for mass assignments to models.
 #
 #See http://guides.rubyonrails.org/security.html#mass-assignment for details
-class CheckMassAssignment < BaseCheck
-  Checks.add self
+class Brakeman::CheckMassAssignment < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     return if mass_assign_disabled? tracker

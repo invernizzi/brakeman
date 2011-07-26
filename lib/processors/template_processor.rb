@@ -1,7 +1,7 @@
 require 'processors/base_processor'
 
 #Base Processor for templates/views
-class TemplateProcessor < BaseProcessor
+class Brakeman::TemplateProcessor < Brakeman::BaseProcessor
 
   #Initializes template information.
   def initialize tracker, template_name, called_from = nil, file_name = nil

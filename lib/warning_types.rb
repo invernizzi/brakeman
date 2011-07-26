@@ -1,7 +1,7 @@
 require "active_support/core_ext"
 
 #a simple container for the warning types descriptions
-module WarningTypes
+module Brakeman::WarningTypes
     mattr_accessor :description
 
     self.description = {

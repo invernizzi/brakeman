@@ -2,7 +2,7 @@ require 'processors/template_processor'
 
 #Processes ERB templates
 #(those ending in .html.erb or .rthml).
-class ErbTemplateProcessor < TemplateProcessor
+class Brakeman::ErbTemplateProcessor < Brakeman::TemplateProcessor
   
   #s(:call, TARGET, :method, s(:arglist))
   def process_call exp

@@ -5,8 +5,8 @@ require 'processors/lib/find_call'
 #with certain versions of Rails (< 2.3.11 or < 3.0.4).
 #
 #http://groups.google.com/group/rubyonrails-security/browse_thread/thread/f02a48ede8315f81
-class CheckMailTo < BaseCheck
-  Checks.add self
+class Brakeman::CheckMailTo < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     if (version_between? "2.3.0", "2.3.10" or version_between? "3.0.0", "3.0.3") and result = mail_to_javascript?

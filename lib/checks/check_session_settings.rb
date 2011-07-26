@@ -1,13 +1,13 @@
 require 'checks/base_check'
 
 #Checks for session key length and http_only settings
-class CheckSessionSettings < BaseCheck
-  Checks.add self
+class Brakeman::CheckSessionSettings < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   if OPTIONS[:rails3]
-    SessionSettings = Sexp.new(:call, Sexp.new(:colon2, Sexp.new(:const, :Rails3), :Application), :config, Sexp.new(:arglist))
+    Brakeman::SessionSettings = Sexp.new(:call, Sexp.new(:colon2, Sexp.new(:const, :Rails3), :Application), :config, Sexp.new(:arglist))
   else
-    SessionSettings = Sexp.new(:colon2, Sexp.new(:const, :ActionController), :Base)
+    Brakeman::SessionSettings = Sexp.new(:colon2, Sexp.new(:const, :ActionController), :Base)
   end
 
   def run_check
@@ -25,7 +25,7 @@ class CheckSessionSettings < BaseCheck
   #Looks for ActionController::Base.session = { ... }
   #in Rails 2.x apps
   def process_attrasgn exp
-    if not OPTIONS[:rails3] and exp[1] == SessionSettings and exp[2] == :session=
+    if not OPTIONS[:rails3] and exp[1] == Brakeman::SessionSettings and exp[2] == :session=
       check_for_issues exp[3][1], "#{OPTIONS[:app_path]}/config/initializers/session_store.rb"
       exp
     else
@@ -36,7 +36,7 @@ class CheckSessionSettings < BaseCheck
   #Looks for Rails3::Application.config.session_store :cookie_store, { ... }
   #in Rails 3.x apps
   def process_call exp
-    if OPTIONS[:rails3] and exp[1] == SessionSettings and exp[2] == :session_store
+    if OPTIONS[:rails3] and exp[1] == Brakeman::SessionSettings and exp[2] == :session_store
         check_for_issues exp[3][2], "#{OPTIONS[:app_path]}/config/initializers/session_store.rb"
       exp
     else

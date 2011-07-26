@@ -15,23 +15,23 @@ end
 require 'blessing'
 
 #Erubis processor which ignores any output which is plain text.
-class ScannerErubis < Erubis::Eruby
+class Brakeman::ScannerErubis < Erubis::Eruby
   include Erubis::NoTextEnhancer
 end
 
-class ErubisEscape < ScannerErubis
+class Brakeman::ErubisEscape < Brakeman::ScannerErubis
   include Erubis::EscapeEnhancer
 end
 
 #Scans the Rails application.
-class Scanner
+class Brakeman::Scanner
   RUBY_1_9 = !!(RUBY_VERSION =~ /^1\.9/)
 
   #Pass in path to the root of the Rails application
   def initialize path
     @path = path
     @app_path = File.join(path, "app")
-    @processor = Processor.new
+    @processor = Brakeman::Processor.new
   end
 
   #Returns the Tracker generated from the scan
@@ -66,7 +66,7 @@ class Scanner
     content = File.read file
 
     #look for blessings
-    Blessing.parse_string_for_blessings content
+    Brakeman::Blessing.parse_string_for_blessings content
 
     #do the custom parsing
     begin
@@ -159,20 +159,20 @@ class Scanner
       type = :erb if type == :rhtml
       name = template_path_to_name f
       text = File.read f
-      Blessing.parse_string_for_blessings text, type
+      Brakeman::Blessing.parse_string_for_blessings text, type
 
       begin
         if type == :erb
           if tracker.config[:escape_html]
             type = :erubis
             if OPTIONS[:rails3]
-              src = RailsXSSErubis.new(text).src
+              src = Brakeman::RailsXSSErubis.new(text).src
             else
-              src = ErubisEscape.new(text).src
+              src = Brakeman::ErubisEscape.new(text).src
             end
           elsif tracker.config[:erubis]
             type = :erubis
-            src = ScannerErubis.new(text).src
+            src = Brakeman::ScannerErubis.new(text).src
           else
             src = ERB.new(text, nil, "-").src
             src.sub!(/^#.*\n/, '') if RUBY_1_9
@@ -238,7 +238,7 @@ class Scanner
 end
 
 #This is from Rails 3 version of the Erubis handler
-class RailsXSSErubis < ::Erubis::Eruby
+class Brakeman::RailsXSSErubis < ::Erubis::Eruby
 
   def add_preamble(src)
     # src << "_buf = ActionView::SafeBuffer.new;\n"

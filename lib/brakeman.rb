@@ -15,7 +15,7 @@ module Brakeman
     end
 
     #Start scanning
-    scanner = Scanner.new OPTIONS[:app_path]
+    scanner = Brakeman::Scanner.new OPTIONS[:app_path]
 
     warn "Processing application in #{OPTIONS[:app_path]}"
     tracker = scanner.process

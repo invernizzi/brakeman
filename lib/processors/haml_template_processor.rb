@@ -1,7 +1,7 @@
 require 'processors/template_processor'
 
 #Processes HAML templates.
-class HamlTemplateProcessor < TemplateProcessor
+class Brakeman::HamlTemplateProcessor < Brakeman::TemplateProcessor
   HAML_FORMAT_METHOD = /format_script_(true|false)_(true|false)_(true|false)_(true|false)_(true|false)_(true|false)_(true|false)/
   
   def initialize *args

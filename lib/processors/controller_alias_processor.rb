@@ -3,8 +3,8 @@ require 'processors/lib/render_helper'
 
 #Processes aliasing in controllers, but includes following
 #renders in routes and putting variables into templates
-class ControllerAliasProcessor < AliasProcessor
-  include RenderHelper
+class Brakeman::ControllerAliasProcessor < Brakeman::AliasProcessor
+  include Brakeman::RenderHelper
 
   def initialize tracker
     super()
@@ -83,7 +83,7 @@ class ControllerAliasProcessor < AliasProcessor
       return
     end
 
-    processor = AliasProcessor.new
+    processor = Brakeman::AliasProcessor.new
     processor.process_safely(method[3])
 
     processor.only_ivars.all.each do |variable, value|

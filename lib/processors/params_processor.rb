@@ -3,7 +3,7 @@ require 'sexp_processor'
 require 'set'
 
 #Looks for request parameters. Not used currently.
-class ParamsProcessor < SexpProcessor
+class Brakeman::ParamsProcessor < SexpProcessor
   attr_reader :result
 
   def initialize

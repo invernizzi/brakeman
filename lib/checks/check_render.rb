@@ -1,8 +1,8 @@
 require 'checks/base_check'
 
 #Check calls to +render()+ for dangerous values
-class CheckRender < BaseCheck
-  Checks.add self
+class Brakeman::CheckRender < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     tracker.each_method do |src, class_name, method_name|

@@ -2,7 +2,7 @@ require 'ruby_parser'
 require 'processors/base_processor'
 
 #Processes controller. Results are put in tracker.controllers
-class ControllerProcessor < BaseProcessor
+class Brakeman::ControllerProcessor < Brakeman::BaseProcessor
   FORMAT_HTML = Sexp.new(:call, Sexp.new(:lvar, :format), :html, Sexp.new(:arglist))
 
   def initialize tracker

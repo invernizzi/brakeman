@@ -2,8 +2,8 @@ require 'checks/base_check'
 require 'processors/lib/processor_helper'
 
 #Checks for user input in methods which open or manipulate files
-class CheckFileAccess < BaseCheck
-  Checks.add self
+class Brakeman::CheckFileAccess < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     methods = tracker.find_call [[:Dir, :File, :IO, :Kernel, :"Net::FTP", :"Net::HTTP", :PStore, :Pathname, :Shell, :YAML], []], [:[], :chdir, :chroot, :delete, :entries, :foreach, :glob, :install, :lchmod, :lchown, :link, :load, :load_file, :makedirs, :move, :new, :open, :read, :read_lines, :rename, :rmdir, :safe_unlink, :symlink, :syscopy, :sysopen, :truncate, :unlink]

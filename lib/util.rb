@@ -3,7 +3,7 @@ require 'set'
 require 'active_support/inflector'
 
 #This is a mixin containing utility methods.
-module Util
+module Brakeman::Util
 
   QUERY_PARAMETERS = Sexp.new(:call, Sexp.new(:call, nil, :request, Sexp.new(:arglist)), :query_parameters, Sexp.new(:arglist))
 
@@ -138,4 +138,5 @@ module Util
   def sexp? exp
     exp.is_a? Sexp
   end
+
 end

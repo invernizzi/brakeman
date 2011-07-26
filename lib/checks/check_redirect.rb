@@ -6,8 +6,8 @@ require 'processors/lib/find_call'
 #For example:
 #
 # redirect_to params.merge(:action => :elsewhere)
-class CheckRedirect < BaseCheck
-  Checks.add self
+class Brakeman::CheckRedirect < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     @tracker.find_call(nil, :redirect_to).each do |c|

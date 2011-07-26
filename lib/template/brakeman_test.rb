@@ -1,7 +1,7 @@
 require "test_helper"
 require 'brakeman'
 
-class BrakemanTest < ActionController::IntegrationTest
+class Brakeman::BrakemanTest < ActionController::IntegrationTest
 
   def test_static_analyisis
     options = {:app_path => ::Rails.root.to_s,

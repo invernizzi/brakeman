@@ -22,7 +22,7 @@ RAILS_CONFIG = Sexp.new(:const, :"!BRAKEMAN_RAILS_CONFIG")
 #  tracker.config[:rails][:action_controller][:session_store]
 #
 #Values for tracker.config[:rails] will still be Sexps.
-class ConfigProcessor < BaseProcessor
+class Brakeman::ConfigProcessor < Brakeman::BaseProcessor
   def initialize *args
     super
     @tracker.config[:rails] ||= {}
@@ -30,7 +30,7 @@ class ConfigProcessor < BaseProcessor
 
   #Use this method to process configuration file
   def process_config src
-    res = ConfigAliasProcessor.new.process_safely(src)
+    res = Brakeman::ConfigAliasProcessor.new.process_safely(src)
     process res
   end
 
@@ -122,7 +122,7 @@ class ConfigProcessor < BaseProcessor
 end
 
 #This is necessary to replace block variable so we can track config settings
-class ConfigAliasProcessor < AliasProcessor
+class Brakeman::ConfigAliasProcessor < Brakeman::AliasProcessor
 
   RAILS_INIT = Sexp.new(:colon2, Sexp.new(:const, :Rails), :Initializer)
 

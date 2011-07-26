@@ -5,7 +5,7 @@ require 'processors/lib/find_call'
 require 'processors/lib/find_model_call'
 
 #The Tracker keeps track of all the processed information.
-class Tracker
+class Brakeman::Tracker
   attr_accessor :controllers, :templates, :models, :errors,
     :checks, :initializers, :config, :routes, :processor, :libs,
     :template_cache
@@ -56,7 +56,7 @@ class Tracker
   #Run a set of checks on the current information. Results will be stored
   #in Tracker#checks.
   def run_checks
-    @checks = Checks.run_checks(self)
+    @checks = Brakeman::Checks.run_checks(self)
   end
 
   #Iterate over all methods in controllers and models.
@@ -97,7 +97,7 @@ class Tracker
   #
   #See FindCall for details on arguments.
   def find_call target, method
-    finder = FindCall.new target, method
+    finder = Brakeman::FindCall.new target, method
 
     self.each_method do |definition, set_name, method_name|
       finder.process_source definition, set_name, method_name
@@ -114,7 +114,7 @@ class Tracker
   #
   #See FindCall for details on arguments.
   def find_model_find target
-    finder = FindModelCall.new target
+    finder = Brakeman::FindModelCall.new target
 
     self.each_method do |definition, set_name, method_name|
       finder.process_source definition, set_name, method_name
@@ -129,7 +129,7 @@ class Tracker
 
   #Similar to Tracker#find_call, but searches the initializers
   def check_initializers target, method
-    finder = FindCall.new target, method
+    finder = Brakeman::FindCall.new target, method
 
     initializers.each do |name, initializer|
       finder.process_source initializer
@@ -140,6 +140,6 @@ class Tracker
 
   #Returns a Report with this Tracker's information
   def report
-    Report.new(self)
+    Brakeman::Report.new(self)
   end
 end

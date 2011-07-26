@@ -3,7 +3,7 @@
 #Checks can be added with +Check.add(check_class)+
 #
 #All .rb files in checks/ will be loaded.
-class Checks
+class Brakeman::Checks
   @checks = []
 
   attr_reader :warnings, :controller_warnings, :model_warnings, :template_warnings, :checks_run
@@ -59,16 +59,17 @@ class Checks
   def self.run_checks tracker
     checks = self.new
     @checks.each do |c|
+      name = c.to_s.sub /^Brakeman::/, ''
       #Run or don't run check based on options
-      unless OPTIONS[:skip_checks].include? c.to_s or 
-        (OPTIONS[:run_checks] and not OPTIONS[:run_checks].include? c.to_s)
+      unless OPTIONS[:skip_checks].include? name or 
+        (OPTIONS[:run_checks] and not OPTIONS[:run_checks].include? name)
 
-        warn " - #{c}"
+        warn " - #{name}"
         c.new(checks, tracker).run_check
 
         #Maintain list of which checks were run
         #mainly for reporting purposes
-        checks.checks_run << c.to_s[5..-1]
+        checks.checks_run << c.to_s.sub(/^Brakeman::Check/, '')
       end
     end
     checks

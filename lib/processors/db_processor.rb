@@ -1,7 +1,7 @@
 require 'processors/base_processor'
 
 #Processes db_migration files. Puts results in tracker.models
-class DbProcessor < BaseProcessor
+class Brakeman::DbProcessor < Brakeman::BaseProcessor
   def initialize tracker
     super 
     @file_name = nil

@@ -9,8 +9,8 @@ require 'processors/lib/find_call'
 # Project.find(:all, :conditions => "name = '#{params[:name]}'")
 #
 # User.find_by_sql("SELECT * FROM projects WHERE name = '#{params[:name]}'")
-class CheckSQL < BaseCheck
-  Checks.add self
+class Brakeman::CheckSQL < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     @rails_version = tracker.config[:rails_version]

@@ -4,8 +4,8 @@ require 'processors/lib/render_helper'
 
 #Processes aliasing in templates.
 #Handles calls to +render+.
-class TemplateAliasProcessor < AliasProcessor
-  include RenderHelper
+class Brakeman::TemplateAliasProcessor < Brakeman::AliasProcessor
+  include Brakeman::RenderHelper
 
   FORM_METHODS = Set.new([:form_for, :remote_form_for, :form_remote_for])
 
@@ -44,7 +44,7 @@ class TemplateAliasProcessor < AliasProcessor
         if model == target[1]
           env[Sexp.new(:lvar, args[1])] = Sexp.new(:call, model, :new, Sexp.new(:arglist))
         else
-          env[Sexp.new(:lvar, args[1])] = Sexp.new(:call, Sexp.new(:const, Tracker::UNKNOWN_MODEL), :new, Sexp.new(:arglist))
+          env[Sexp.new(:lvar, args[1])] = Sexp.new(:call, Sexp.new(:const, Brakeman::Tracker::UNKNOWN_MODEL), :new, Sexp.new(:arglist))
         end
         
         process block if sexp? block

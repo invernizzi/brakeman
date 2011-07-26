@@ -1,8 +1,8 @@
 require 'warning_types'
 
 #The Warning class stores information about warnings
-class Warning
-  include WarningTypes
+class Brakeman::Warning
+  include Brakeman::WarningTypes
   attr_reader :called_from, :check, :class, :confidence, :controller,
     :line, :method, :model, :template, :warning_set, :warning_type
 
@@ -61,7 +61,7 @@ class Warning
   #Return String of the code output from the OutputProcessor and
   #stripped of newlines and tabs.
   def format_code
-    OutputProcessor.new.format(self.code).gsub(/(\t|\r|\n)+/, " ")
+    Brakeman::OutputProcessor.new.format(self.code).gsub(/(\t|\r|\n)+/, " ")
   end
 
   #Return formatted warning message
@@ -80,7 +80,7 @@ class Warning
 
   def warning_type_collapsible warning_type
     random_id = (0...8).map{65.+(rand(25)).chr}.join
-    description = WarningTypes.description[warning_type]
+    description = Brakeman::WarningTypes.description[warning_type]
     return warning_type unless description
     <<-HTML
     <div class='warning_type' onclick=\"toggle('#{random_id}');\">

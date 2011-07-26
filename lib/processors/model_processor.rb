@@ -1,7 +1,7 @@
 require 'processors/base_processor'
 
 #Processes models. Puts results in tracker.models
-class ModelProcessor < BaseProcessor
+class Brakeman::ModelProcessor < Brakeman::BaseProcessor
   def initialize tracker
     super 
     @model = nil

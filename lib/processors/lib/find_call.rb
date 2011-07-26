@@ -29,7 +29,7 @@ require 'processors/base_processor'
 #
 # #Find all calls to sub, sub!, gsub, or gsub!
 # FindCall.new nil, /^g?sub!?$/
-class FindCall < BaseProcessor
+class Brakeman::FindCall < Brakeman::BaseProcessor
 
   def initialize targets, methods, in_depth = false
     super(nil)

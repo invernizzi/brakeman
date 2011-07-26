@@ -4,8 +4,8 @@ require 'checks/base_check'
 #
 #Also warns for CSRF weakness in certain versions of Rails:
 #http://groups.google.com/group/rubyonrails-security/browse_thread/thread/2d95a3cc23e03665
-class CheckForgerySetting < BaseCheck
-  Checks.add self
+class Brakeman::CheckForgerySetting < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     app_controller = tracker.controllers[:ApplicationController]

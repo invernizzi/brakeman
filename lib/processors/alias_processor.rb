@@ -6,9 +6,9 @@ require 'processors/lib/processor_helper'
 #Returns an s-expression with aliases replaced with their value.
 #This does not preserve semantics (due to side effects, etc.), but it makes
 #processing easier when searching for various things.
-class AliasProcessor < SexpProcessor
-  include ProcessorHelper
-  include Util
+class Brakeman::AliasProcessor < SexpProcessor
+  include Brakeman::ProcessorHelper
+  include Brakeman::Util
 
   attr_reader :result
 

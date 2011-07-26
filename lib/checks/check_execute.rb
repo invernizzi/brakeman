@@ -9,8 +9,8 @@ require 'processors/lib/find_call'
 # system("rf -rf #{params[:file]}")
 # exec(params[:command])
 # `unlink #{params[:something}`
-class CheckExecute < BaseCheck
-  Checks.add self
+class Brakeman::CheckExecute < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   #Check models, controllers, and views for command injection.
   def run_check

@@ -11,8 +11,8 @@ require 'set'
 #
 # <%= User.find(:id).name %>
 # <%= params[:id] %>
-class CheckCrossSiteScripting < BaseCheck
-  Checks.add self
+class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   #Ignore these methods and their arguments.
   #It is assumed they will take care of escaping their output.
@@ -44,7 +44,7 @@ class CheckCrossSiteScripting < BaseCheck
     @models = tracker.models.keys
     @inspect_arguments = OPTIONS[:check_arguments]
 
-    CheckLinkTo.new(checks, tracker).run_check
+    Brakeman::CheckLinkTo.new(checks, tracker).run_check
 
     tracker.each_template do |name, template|
       @current_template = template
@@ -224,7 +224,7 @@ class CheckCrossSiteScripting < BaseCheck
 end
 
 #This _only_ checks calls to link_to
-class CheckLinkTo < CheckCrossSiteScripting
+class Brakeman::CheckLinkTo < Brakeman::CheckCrossSiteScripting
   IGNORE_METHODS = IGNORE_METHODS - [:link_to]
 
   def run_check

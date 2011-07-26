@@ -1,5 +1,5 @@
 #Contains a couple shared methods for Processors.
-module ProcessorHelper
+module Brakeman::ProcessorHelper
 
   #Sets the current module.
   def process_module exp

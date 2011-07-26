@@ -5,8 +5,8 @@ require 'checks/base_check'
 #
 #If OPTIONS[:collapse_mass_assignment] is +true+ (default), all models which do
 #not use attr_accessible will be reported in a single warning
-class CheckModelAttributes < BaseCheck
-  Checks.add self
+class Brakeman::CheckModelAttributes < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     return if mass_assign_disabled? tracker

@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 #Processes a call to render() in a controller or template
-module RenderHelper
+module Brakeman::RenderHelper
 
   #Process s(:render, TYPE, OPTIONS)
   def process_render exp
@@ -105,13 +105,13 @@ module RenderHelper
           end
         end
 
-        template_env[Sexp.new(:call, nil, variable, Sexp.new(:arglist))] = Sexp.new(:call, Sexp.new(:const, Tracker::UNKNOWN_MODEL), :new, Sexp.new(:arglist))
+        template_env[Sexp.new(:call, nil, variable, Sexp.new(:arglist))] = Sexp.new(:call, Sexp.new(:const, Brakeman::Tracker::UNKNOWN_MODEL), :new, Sexp.new(:arglist))
       end
 
       #Run source through AliasProcessor with instance variables from the
       #current environment.
       #TODO: Add in :locals => { ... } to environment
-      src = TemplateAliasProcessor.new(@tracker, template).process_safely(template[:src], template_env)
+      src = Brakeman::TemplateAliasProcessor.new(@tracker, template).process_safely(template[:src], template_env)
 
       #Run alias-processed src through the template processor to pull out
       #information and outputs.

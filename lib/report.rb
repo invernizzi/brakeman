@@ -9,8 +9,8 @@ require 'blessing'
 #Generates a report based on the Tracker and the results of
 #Tracker#run_checks. Be sure to +run_checks+ before generating
 #a report.
-class Report
-  include Util
+class Brakeman::Report
+  include Brakeman::Util
 
   attr_reader :tracker, :checks
 
@@ -28,7 +28,7 @@ class Report
 
   def filter_false_positives
       checks.filter_warnings do |warning|
-        Blessing.is_blessed? warning
+        Brakeman::Blessing.is_blessed? warning
       end
   end
 
@@ -564,7 +564,7 @@ class Report
   end
 
   def toggle_blessing warning
-    hash = Blessing.hash_result warning
+    hash = Brakeman::Blessing.hash_result warning
     <<-HTML
     <div class='blessing_hash' onclick=\"toggle('#{hash}');\">
         #{hash}

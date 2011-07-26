@@ -2,8 +2,8 @@ require 'checks/base_check'
 
 #This check looks for calls to +eval+, +instance_eval+, etc. which include
 #user input.
-class CheckEvaluation < BaseCheck
-  Checks.add self
+class Brakeman::CheckEvaluation < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   #Process calls
   def run_check

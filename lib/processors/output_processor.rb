@@ -6,8 +6,8 @@ require 'util'
 #Recommended usage is
 #
 #  OutputProcessor.new.format(Sexp.new(:str, "hello"))
-class OutputProcessor < Ruby2Ruby
-  include Util
+class Brakeman::OutputProcessor < Ruby2Ruby
+  include Brakeman::Util
 
   #Copies +exp+ and then formats it.
   def format exp
@@ -203,7 +203,7 @@ def process_escaped_output exp
   end
 
   def process_const exp
-    if exp[0] == Tracker::UNKNOWN_MODEL
+    if exp[0] == Brakeman::Tracker::UNKNOWN_MODEL
       exp.clear
       "(Unresolved Model)"
     else

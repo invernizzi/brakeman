@@ -7,8 +7,8 @@ require 'checks/base_check'
 #
 # #Allows anything after new line
 # validates_format_of :user_name, :with => /^\w+$/
-class CheckValidationRegex < BaseCheck
-  Checks.add self
+class Brakeman::CheckValidationRegex < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   WITH = Sexp.new(:lit, :with)
 

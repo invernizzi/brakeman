@@ -1,8 +1,8 @@
 require 'checks/base_check'
 
 #Checks if default routes are allowed in routes.rb
-class CheckDefaultRoutes < BaseCheck
-  Checks.add self
+class Brakeman::CheckDefaultRoutes < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   #Checks for :allow_all_actions globally and for individual routes
   #if it is not enabled globally.

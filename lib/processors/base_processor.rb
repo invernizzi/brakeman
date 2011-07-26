@@ -4,9 +4,9 @@ require 'processors/lib/processor_helper'
 require 'util'
 
 #Base processor for most processors.
-class BaseProcessor < SexpProcessor
-  include ProcessorHelper
-  include Util
+class Brakeman::BaseProcessor < SexpProcessor
+  include Brakeman::ProcessorHelper
+  include Brakeman::Util
 
   attr_reader :ignore
 

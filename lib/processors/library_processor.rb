@@ -2,12 +2,12 @@ require 'processors/base_processor'
 require 'processors/alias_processor'
 
 #Process generic library and stores it in Tracker.libs
-class LibraryProcessor < BaseProcessor
+class Brakeman::LibraryProcessor < Brakeman::BaseProcessor
 
   def initialize tracker
     super
     @file_name = nil
-    @alias_processor = AliasProcessor.new
+    @alias_processor = Brakeman::AliasProcessor.new
   end
 
   def process_library src, file_name = nil

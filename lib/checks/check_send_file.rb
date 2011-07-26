@@ -2,8 +2,8 @@ require 'checks/check_file_access'
 require 'processors/lib/processor_helper'
 
 #Checks for user input in send_file()
-class CheckSendFile < CheckFileAccess
-  Checks.add self
+class Brakeman::CheckSendFile < Brakeman::CheckFileAccess
+  Brakeman::Checks.add self
 
   def run_check
     methods = tracker.find_call nil, :send_file

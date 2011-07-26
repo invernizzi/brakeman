@@ -1,7 +1,7 @@
 require 'processors/template_processor'
 
 #Processes ERB templates using Erubis instead of erb.
-class ErubisTemplateProcessor < TemplateProcessor
+class Brakeman::ErubisTemplateProcessor < Brakeman::TemplateProcessor
 
   
   #s(:call, TARGET, :method, s(:arglist))

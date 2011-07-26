@@ -5,9 +5,9 @@ require 'warning'
 require 'util'
 
 #Basis of vulnerability checks.
-class BaseCheck < SexpProcessor
-  include ProcessorHelper
-  include Util
+class Brakeman::BaseCheck < SexpProcessor
+  include Brakeman::ProcessorHelper
+  include Brakeman::Util
   attr_reader :checks, :tracker
 
   CONFIDENCE = { :high => 0, :med => 1, :low => 2 }
@@ -83,12 +83,12 @@ class BaseCheck < SexpProcessor
 
   #Report a warning 
   def warn options
-    @checks.add_warning Warning.new(options.merge({ :check => self.class.to_s }))
+    @checks.add_warning Brakeman::Warning.new(options.merge({ :check => self.class.to_s }))
   end 
 
   #Run _exp_ through OutputProcessor to get a nice String.
   def format_output exp
-    OutputProcessor.new.format(exp).gsub(/\r|\n/, "")
+    Brakeman::OutputProcessor.new.format(exp).gsub(/\r|\n/, "")
   end
 
   #Checks if the model inherits from parent,
