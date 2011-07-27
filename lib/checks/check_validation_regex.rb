@@ -44,7 +44,7 @@ class Brakeman::CheckValidationRegex < Brakeman::BaseCheck
         :warning_type => "Format Validation", 
         :message => "Insufficient validation for '#{get_name validator}' using #{value[1].inspect}. Use \\A and \\z as anchors",
         :line => value.line,
-        :confidence => CONFIDENCE[:high] 
+        :confidence =>  regex =~ /\A\^.*\$\z/ ? CONFIDENCE[:high] : CONFIDENCE[:low] #low confidence if there are no ^$ in the original regexp
     end
   end
 
