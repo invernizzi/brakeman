@@ -11,13 +11,14 @@ class Brakeman::CheckValidationRegex < Brakeman::BaseCheck
   Brakeman::Checks.add self
 
   WITH = Sexp.new(:lit, :with)
+  FORMAT = Sexp.new(:lit, :format)
 
   def run_check
     tracker.models.each do |name, model|
       @current_model = name
-      format_validations = model[:options][:validates_format_of]
-      if format_validations
-        format_validations.each do |v|
+      format_validations = Hash[model[:options].select { |k,v| k.to_s =~/\Avalidates/  }]
+      format_validations.each do |validation_instruction, validations|
+        validations.each do |v|
           process_validator v
         end
       end
@@ -29,6 +30,8 @@ class Brakeman::CheckValidationRegex < Brakeman::BaseCheck
     hash_iterate(validator[-1]) do |key, value|
       if key == WITH
         check_regex value, validator
+      elsif key == FORMAT
+        process_validator validator.slice(0, 2) + [value]
       end
     end
   end
