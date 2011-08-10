@@ -35,8 +35,13 @@ module Brakeman
 
     #if warnings have been found, exit with a non-zero exit code (for Continuous
     #Integration)
-    exit tracker.checks.warnings.length if cli_mode
-    return tracker.checks.warnings.length
+    errors_num = tracker.checks.warnings.length +
+                  tracker.checks.template_warnings.length +
+                  tracker.checks.controller_warnings.length +
+                  tracker.checks.model_warnings.length
+
+    exit errors_num if cli_mode
+    return errors_num
   end
 
   private
