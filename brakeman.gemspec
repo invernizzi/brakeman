@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Justin Collins", "Luca Invernizzi"]
-  s.date = %q{2011-07-06}
+  s.date = %q{2011-08-10}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
   s.email = ["", "invernizzi.l@gmail.com"]
   s.executables = ["brakeman"]
@@ -52,6 +52,7 @@ Gem::Specification.new do |s|
     "lib/processors/config_processor.rb",
     "lib/processors/controller_alias_processor.rb",
     "lib/processors/controller_processor.rb",
+    "lib/processors/db_processor.rb",
     "lib/processors/erb_template_processor.rb",
     "lib/processors/erubis_template_processor.rb",
     "lib/processors/haml_template_processor.rb",
@@ -64,7 +65,6 @@ Gem::Specification.new do |s|
     "lib/processors/lib/route_helper.rb",
     "lib/processors/library_processor.rb",
     "lib/processors/model_processor.rb",
-    "lib/processors/db_processor.rb",
     "lib/processors/output_processor.rb",
     "lib/processors/params_processor.rb",
     "lib/processors/route_processor.rb",
@@ -73,6 +73,7 @@ Gem::Specification.new do |s|
     "lib/report.rb",
     "lib/scanner.rb",
     "lib/tasks/brakeman_tasks.rake",
+    "lib/template/brakeman_test.rb",
     "lib/tracker.rb",
     "lib/util.rb",
     "lib/version.rb",
@@ -150,6 +151,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<erubis>, [">= 2.6.5"])
       s.add_runtime_dependency(%q<haml>, [">= 3.0.12"])
       s.add_runtime_dependency(%q<sass>, [">= 0"])
+      s.add_runtime_dependency(%q<i18n>, [">= 0"])
     else
       s.add_dependency(%q<activesupport>, [">= 2.2"])
       s.add_dependency(%q<ruby2ruby>, [">= 1.2.4"])
@@ -157,6 +159,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<erubis>, [">= 2.6.5"])
       s.add_dependency(%q<haml>, [">= 3.0.12"])
       s.add_dependency(%q<sass>, [">= 0"])
+      s.add_dependency(%q<i18n>, [">= 0"])
     end
   else
     s.add_dependency(%q<activesupport>, [">= 2.2"])
@@ -165,6 +168,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<erubis>, [">= 2.6.5"])
     s.add_dependency(%q<haml>, [">= 3.0.12"])
     s.add_dependency(%q<sass>, [">= 0"])
+    s.add_dependency(%q<i18n>, [">= 0"])
   end
 end
 
