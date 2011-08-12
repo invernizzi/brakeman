@@ -5,7 +5,7 @@ require 'yaml'
 
 $:.unshift "#{File.expand_path(File.dirname(__FILE__))}/../lib"
 
-require 'version'
+require 'brakeman/version'
 require 'brakeman'
 
 trap("INT") do

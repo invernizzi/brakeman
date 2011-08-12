@@ -6,10 +6,9 @@ module Brakeman
   def self.main(options_from_cli={}, cli_mode=false)
     #restore the config from file, or load the defaults
     restore_config(options_from_cli)
-
     #Load scanner
     begin
-      require 'scanner'
+      require 'brakeman/scanner'
     rescue LoadError
       abort "Cannot find lib/ directory."
     end
@@ -52,7 +51,7 @@ module Brakeman
       File.expand_path("./config.yaml"),
       File.expand_path("~/.brakeman/config.yaml"),
       File.expand_path("/etc/brakeman/config.yaml"),
-      "#{File.expand_path(File.dirname(__FILE__))}/../lib/config.yaml"].each do |f|
+      "#{File.expand_path(File.dirname(__FILE__))}/../lib/brakeman/config.yaml"].each do |f|
 
       if File.exist? f and not File.directory? f
         warn "[Notice] Using configuration in #{f}" unless options[:quiet]
@@ -82,7 +81,7 @@ module Brakeman
       :ignore_redirect_to_model => true,
       :ignore_model_output => false,
       :message_limit => 100,
-      :html_style => "#{File.expand_path(File.dirname(__FILE__))}/../lib/format/style.css" 
+      :html_style => "#{File.expand_path(File.dirname(__FILE__))}/../lib/brakeman/format/style.css" 
     }.each do |k,v|
       OPTIONS[k] = v if OPTIONS[k].nil?
     end
