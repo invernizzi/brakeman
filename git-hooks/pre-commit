@@ -1,0 +1,3 @@
+#!/bin/sh
+rake gemspec:generate build
+git add pkg/*.gem

@@ -8,11 +8,11 @@ Gem::Specification.new do |s|
   s.version = "0.5.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Justin Collins", "Luca Invernizzi"]
-  s.date = %q{2011-08-12}
+  s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
+  s.date = %q{2011-08-19}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
-  s.email = ["", "invernizzi.l@gmail.com"]
-  s.executables = ["brakeman"]
+  s.email = [%q{}, %q{invernizzi.l@gmail.com}]
+  s.executables = [%q{brakeman}]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.md"
@@ -25,60 +25,8 @@ Gem::Specification.new do |s|
     "Rakefile",
     "WARNING_TYPES",
     "bin/brakeman",
-    "config/application.rb",
     "lib/brakeman.rb",
     "lib/brakeman/blessing.rb",
-    "lib/brakeman/brakeman/blessing.rb",
-    "lib/brakeman/brakeman/checks.rb",
-    "lib/brakeman/brakeman/checks/base_check.rb",
-    "lib/brakeman/brakeman/checks/check_cross_site_scripting.rb",
-    "lib/brakeman/brakeman/checks/check_default_routes.rb",
-    "lib/brakeman/brakeman/checks/check_evaluation.rb",
-    "lib/brakeman/brakeman/checks/check_execute.rb",
-    "lib/brakeman/brakeman/checks/check_file_access.rb",
-    "lib/brakeman/brakeman/checks/check_forgery_setting.rb",
-    "lib/brakeman/brakeman/checks/check_mail_to.rb",
-    "lib/brakeman/brakeman/checks/check_mass_assignment.rb",
-    "lib/brakeman/brakeman/checks/check_model_attributes.rb",
-    "lib/brakeman/brakeman/checks/check_nested_attributes.rb",
-    "lib/brakeman/brakeman/checks/check_redirect.rb",
-    "lib/brakeman/brakeman/checks/check_render.rb",
-    "lib/brakeman/brakeman/checks/check_send_file.rb",
-    "lib/brakeman/brakeman/checks/check_session_settings.rb",
-    "lib/brakeman/brakeman/checks/check_sql.rb",
-    "lib/brakeman/brakeman/checks/check_validation_regex.rb",
-    "lib/brakeman/brakeman/processor.rb",
-    "lib/brakeman/brakeman/processors/alias_processor.rb",
-    "lib/brakeman/brakeman/processors/base_processor.rb",
-    "lib/brakeman/brakeman/processors/config_processor.rb",
-    "lib/brakeman/brakeman/processors/controller_alias_processor.rb",
-    "lib/brakeman/brakeman/processors/controller_processor.rb",
-    "lib/brakeman/brakeman/processors/db_processor.rb",
-    "lib/brakeman/brakeman/processors/erb_template_processor.rb",
-    "lib/brakeman/brakeman/processors/erubis_template_processor.rb",
-    "lib/brakeman/brakeman/processors/haml_template_processor.rb",
-    "lib/brakeman/brakeman/processors/lib/find_call.rb",
-    "lib/brakeman/brakeman/processors/lib/find_model_call.rb",
-    "lib/brakeman/brakeman/processors/lib/processor_helper.rb",
-    "lib/brakeman/brakeman/processors/lib/rails2_route_processor.rb",
-    "lib/brakeman/brakeman/processors/lib/rails3_route_processor.rb",
-    "lib/brakeman/brakeman/processors/lib/render_helper.rb",
-    "lib/brakeman/brakeman/processors/lib/route_helper.rb",
-    "lib/brakeman/brakeman/processors/library_processor.rb",
-    "lib/brakeman/brakeman/processors/model_processor.rb",
-    "lib/brakeman/brakeman/processors/output_processor.rb",
-    "lib/brakeman/brakeman/processors/params_processor.rb",
-    "lib/brakeman/brakeman/processors/route_processor.rb",
-    "lib/brakeman/brakeman/processors/template_alias_processor.rb",
-    "lib/brakeman/brakeman/processors/template_processor.rb",
-    "lib/brakeman/brakeman/report.rb",
-    "lib/brakeman/brakeman/scanner.rb",
-    "lib/brakeman/brakeman/template/brakeman_test.rb",
-    "lib/brakeman/brakeman/tracker.rb",
-    "lib/brakeman/brakeman/util.rb",
-    "lib/brakeman/brakeman/version.rb",
-    "lib/brakeman/brakeman/warning.rb",
-    "lib/brakeman/brakeman/warning_types.rb",
     "lib/brakeman/checks.rb",
     "lib/brakeman/checks/base_check.rb",
     "lib/brakeman/checks/check_cross_site_scripting.rb",
@@ -132,8 +80,8 @@ Gem::Specification.new do |s|
     "lib/tasks/brakeman_tasks.rake"
   ]
   s.homepage = %q{http://github.com/invernizzi/brakeman}
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.7.2}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.8}
   s.summary = %q{Security vulnerability scanner for Ruby on Rails.}
   s.test_files = [
     "test/rails2/app/controllers/application_controller.rb",
