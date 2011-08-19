@@ -15,8 +15,8 @@ begin
         s.executables = ["brakeman"]
         s.require_paths = ["lib"]
         s.files = files.flatten
-        s.add_dependency "activesupport", ">= 2.2"
-        s.add_dependency "ruby2ruby", ">= 1.2.4" 
+        s.add_dependency "activesupport"
+        s.add_dependency "ruby2ruby", ">= 1.2.4"
         s.add_dependency "ruport", ">= 1.6.3"
         s.add_dependency "erubis", ">= 2.6.5"
         s.add_dependency "haml", ">= 3.0.12"
