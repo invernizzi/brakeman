@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brakeman}
-  s.version = "0.5.1"
+  s.version = "2.0.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
-  s.date = %q{2011-08-19}
+  s.date = %q{2011-08-22}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
   s.email = [%q{}, %q{invernizzi.l@gmail.com}]
   s.executables = [%q{brakeman}]
@@ -77,6 +77,7 @@ Gem::Specification.new do |s|
     "lib/brakeman/version.rb",
     "lib/brakeman/warning.rb",
     "lib/brakeman/warning_types.rb",
+    "lib/format/style.css",
     "lib/tasks/brakeman_tasks.rake"
   ]
   s.homepage = %q{http://github.com/invernizzi/brakeman}

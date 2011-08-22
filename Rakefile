@@ -3,7 +3,7 @@ require 'rake'
 begin
     require 'jeweler'
     files = ["CHANGES", "LICENSE", "Rakefile", "FEATURES", "README.md",  "WARNING_TYPES"]
-    files << Dir["bin/*", "lib/tasks/*.rake", "lib/**/*.rb", "lib/format/*.css", "config/*.rb"]
+    files << Dir["bin/*", "lib/tasks/*.rake", "lib/**/*.rb", "lib/**/*.css", "config/*.rb"]
 
     Jeweler::Tasks.new do |s|
         s.name = %q{brakeman}
