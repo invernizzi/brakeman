@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brakeman}
-  s.version = "3.9.0"
+  s.version = "3.9.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
@@ -45,6 +45,8 @@ Gem::Specification.new do |s|
     "lib/brakeman/checks/check_session_settings.rb",
     "lib/brakeman/checks/check_sql.rb",
     "lib/brakeman/checks/check_validation_regex.rb",
+    "lib/brakeman/format/format/style.css",
+    "lib/brakeman/format/style.css",
     "lib/brakeman/processor.rb",
     "lib/brakeman/processors/alias_processor.rb",
     "lib/brakeman/processors/base_processor.rb",
@@ -77,7 +79,6 @@ Gem::Specification.new do |s|
     "lib/brakeman/version.rb",
     "lib/brakeman/warning.rb",
     "lib/brakeman/warning_types.rb",
-    "lib/format/style.css",
     "lib/tasks/brakeman_tasks.rake"
   ]
   s.homepage = %q{http://github.com/invernizzi/brakeman}
