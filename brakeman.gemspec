@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brakeman}
-  s.version = "3.9.2"
+  s.version = "3.9.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
-  s.date = %q{2011-08-22}
+  s.date = %q{2011-08-23}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
   s.email = [%q{}, %q{invernizzi.l@gmail.com}]
   s.executables = [%q{brakeman}]
