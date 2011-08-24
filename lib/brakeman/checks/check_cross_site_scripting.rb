@@ -15,13 +15,19 @@ class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
 
   #Ignore these methods and their arguments.
   #It is assumed they will take care of escaping their output.
-  IGNORE_METHODS = Set.new([:h, :escapeHTML, :link_to, :text_field_tag, :hidden_field_tag,
-                           :image_tag, :select, :submit_tag, :hidden_field, :url_encode,
-                           :radio_button, :will_paginate, :button_to, :url_for, :mail_to,
-                           :fields_for, :label, :text_area, :text_field, :hidden_field, :check_box,
-                           :field_field]) 
+  IGNORE_METHODS = Set.new([:button_to, :check_box, :escapeHTML, :escape_once,
+                           :field_field, :fields_for, :h, :hidden_field,
+                           :hidden_field, :hidden_field_tag, :image_tag, :label,
+                           :link_to, :mail_to, :radio_button, :select,
+                           :submit_tag, :text_area, :text_field, 
+                           :text_field_tag, :url_encode, :url_for,
+                           :will_paginate] )
 
+  #Model methods which are known to be harmless
   IGNORE_MODEL_METHODS = Set.new([:average, :count, :maximum, :minimum, :sum])
+
+  #Methods known to not escape their input
+  KNOWN_DANGEROUS = Set.new([:auto_link, :truncate, :concat])
 
   MODEL_METHODS = Set.new([:all, :find, :first, :last, :new])
 
@@ -49,52 +55,65 @@ class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
       @current_template = template
 
       template[:outputs].each do |out|
-        type, match = (out[0] == :output and has_immediate_user_input?(out[1]))
-        if type and not duplicate? out
-            add_result out
-            case type
-            when :params
-              message = "Unescaped parameter value"
-            when :cookies
-              message = "Unescaped cookie value"
-            else
-              message = "Unescaped user input value"
-            end
-
-            warn :template => @current_template, 
-              :warning_type => "Cross Site Scripting",
-              :message => message,
-              :line => match.line,
-              :code => match,
-              :confidence => CONFIDENCE[:high]
-
-        elsif not OPTIONS[:ignore_model_output] and match = has_immediate_model?(out[1])
-          method = match[2]
-
-          unless duplicate? out or IGNORE_MODEL_METHODS.include? method
-            add_result out
-
-            if MODEL_METHODS.include? method or method.to_s =~ /^find_by/
-              confidence = CONFIDENCE[:high]
-            else
-              confidence = CONFIDENCE[:med]
-            end
-
-            code = find_chain out, match
-            warn :template => @current_template,
-              :warning_type => "Cross Site Scripting", 
-              :message => "Unescaped model attribute",
-              :line => code.line,
-              :code => code,
-              :confidence => confidence
-          end
-
-        else
+        unless check_for_immediate_xss out
           @matched = false
           @mark = false
           process out
         end
       end
+    end
+  end
+
+  def check_for_immediate_xss exp
+    if exp[0] == :output
+      out = exp[1]
+    elsif exp[0] == :escaped_output and raw_call? exp
+      out = exp[1][3][1]
+    end
+
+    type, match = has_immediate_user_input? out
+
+    if type and not duplicate? exp
+      add_result exp
+      case type
+      when :params
+        message = "Unescaped parameter value"
+      when :cookies
+        message = "Unescaped cookie value"
+      else
+        message = "Unescaped user input value"
+      end
+
+      warn :template => @current_template, 
+        :warning_type => "Cross Site Scripting",
+        :message => message,
+        :line => match.line,
+        :code => match,
+        :confidence => CONFIDENCE[:high]
+
+    elsif not OPTIONS[:ignore_model_output] and match = has_immediate_model?(out)
+      method = match[2]
+
+      unless duplicate? out or IGNORE_MODEL_METHODS.include? method
+        add_result out
+
+        if MODEL_METHODS.include? method or method.to_s =~ /^find_by/
+          confidence = CONFIDENCE[:high]
+        else
+          confidence = CONFIDENCE[:med]
+        end
+
+        code = find_chain out, match
+        warn :template => @current_template,
+          :warning_type => "Cross Site Scripting", 
+          :message => "Unescaped model attribute",
+          :line => code.line,
+          :code => code,
+          :confidence => confidence
+      end
+
+    else
+      false
     end
   end
 
@@ -106,11 +125,12 @@ class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
   #Look for calls to raw()
   #Otherwise, ignore
   def process_escaped_output exp
-    if exp[1].node_type == :call and exp[1][2] == :raw
-      process_output exp
-    else
-      exp
+    unless check_for_immediate_xss exp
+      if raw_call? exp
+        process exp[1][3][1]
+      end
     end
+    exp
   end
 
   #Check a call for user input
@@ -131,17 +151,25 @@ class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
         message = "Unescaped model attribute" 
       elsif @matched == :params
         message = "Unescaped parameter value" 
+      elsif @matched == :cookies
+        message = "Unescaped cookie value" 
       end
 
       if message and not duplicate? exp
         add_result exp
+
+        if exp[1].nil? and KNOWN_DANGEROUS.include? exp[2]
+          confidence = CONFIDENCE[:high]
+        else
+          confidence = CONFIDENCE[:low]
+        end
 
         warn :template => @current_template, 
           :warning_type => "Cross Site Scripting", 
           :message => message,
           :line => exp.line,
           :code => exp,
-          :confidence => CONFIDENCE[:low]
+          :confidence => confidence
       end
 
       @mark = @matched = false
@@ -172,9 +200,10 @@ class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
       exp[0] = :ignore
       @matched = false
     elsif sexp? exp[1] and model_name? exp[1][1]
-
       @matched = :model
-    elsif @inspect_arguments and (ALL_PARAMETERS.include?(exp) or params? exp)
+    elsif cookies? exp
+      @matched = :cookies
+    elsif @inspect_arguments and params? exp
       @matched = :params
     elsif @inspect_arguments
       process args
@@ -219,6 +248,10 @@ class Brakeman::CheckCrossSiteScripting < Brakeman::BaseCheck
       process e if sexp? e
     end
     exp
+  end
+
+  def raw_call? exp
+    exp[1].node_type == :call and exp[1][2] == :raw
   end
 end
 
@@ -314,7 +347,6 @@ class Brakeman::CheckLinkTo < Brakeman::CheckCrossSiteScripting
     actually_process_call exp
     exp
   end
-
 
   def actually_process_call exp
     return if @matched

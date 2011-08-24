@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brakeman}
-  s.version = "3.9.6"
+  s.version = "3.9.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
@@ -77,6 +77,12 @@ Gem::Specification.new do |s|
     "lib/brakeman/version.rb",
     "lib/brakeman/warning.rb",
     "lib/brakeman/warning_types.rb",
+    "lib/checks/check_escape_function.rb",
+    "lib/checks/check_filter_skipping.rb",
+    "lib/checks/check_quote_table_name.rb",
+    "lib/checks/check_response_splitting.rb",
+    "lib/checks/check_strip_tags.rb",
+    "lib/processors/gem_processor.rb",
     "lib/tasks/brakeman_tasks.rake",
     "lib/template/brakeman_test.rb"
   ]
@@ -119,8 +125,12 @@ Gem::Specification.new do |s|
     "test/rails2/test/unit/user_test.rb",
     "test/rails3/app/controllers/application_controller.rb",
     "test/rails3/app/controllers/home_controller.rb",
+    "test/rails3/app/controllers/other_controller.rb",
     "test/rails3/app/helpers/application_helper.rb",
     "test/rails3/app/helpers/home_helper.rb",
+    "test/rails3/app/helpers/other_helper.rb",
+    "test/rails3/app/models/account.rb",
+    "test/rails3/app/models/user.rb",
     "test/rails3/config/application.rb",
     "test/rails3/config/boot.rb",
     "test/rails3/config/environment.rb",
@@ -135,9 +145,11 @@ Gem::Specification.new do |s|
     "test/rails3/config/routes.rb",
     "test/rails3/db/seeds.rb",
     "test/rails3/test/functional/home_controller_test.rb",
+    "test/rails3/test/functional/other_controller_test.rb",
     "test/rails3/test/performance/browsing_test.rb",
     "test/rails3/test/test_helper.rb",
     "test/rails3/test/unit/helpers/home_helper_test.rb",
+    "test/rails3/test/unit/helpers/other_helper_test.rb",
     "test/test.rb"
   ]
 

@@ -46,6 +46,8 @@ class Brakeman::Scanner
   def process
     warn "Processing configuration..."
     process_config
+    warn "Processing gems..."
+    process_gems
     warn "Processing initializers..."
     process_initializers
     warn "Processing libs..."
@@ -101,13 +103,34 @@ class Brakeman::Scanner
     end
   end
 
+  #Process Gemfile
+  def process_gems
+    if File.exists? "#@path/Gemfile"
+      if File.exists? "#@path/Gemfile.lock"
+        @processor.process_gems(RubyParser.new.parse(File.read("#@path/Gemfile")), File.read("#@path/Gemfile.lock"))
+      else
+        @processor.process_gems(RubyParser.new.parse(File.read("#@path/Gemfile")))
+      end
+    end
+  end
+
   #Process all the .rb files in config/initializers/
   #
   #Adds parsed information to tracker.initializers
   def process_initializers
+<<<<<<< HEAD:lib/brakeman/scanner.rb
     Dir.glob(File.join(@path, "config/initializers/**/*.rb")).sort.each do |f|
       process_file f do |parsed, file|
         @processor.process_initializer file, parsed
+=======
+    Dir.glob(@path + "/config/initializers/**/*.rb").sort.each do |f|
+      begin
+        @processor.process_initializer(f, RubyParser.new.parse(File.read(f)))
+      rescue Racc::ParseError => e
+        tracker.error e, "could not parse #{f}. There is probably a typo in the file. Test it with 'ruby_parse #{f}'"
+      rescue Exception => e
+        tracker.error e.exception(e.message + "\nWhile processing #{f}"), e.backtrace
+>>>>>>> upstream/master:lib/scanner.rb
       end
     end
   end
@@ -119,7 +142,6 @@ class Brakeman::Scanner
     Dir.glob(@path + "/lib/**/*.rb").sort.each do |f|
       process_file f do |parsed, file|
         @processor.process_lib parsed, file
-      end
     end
   end
 
@@ -127,6 +149,7 @@ class Brakeman::Scanner
   #
   #Adds parsed information to tracker.routes
   def process_routes
+    warn "[Notice] No route information found"  unless File.exists? "#@path/config/routes.rb"
     process_file "config/routes.rb" do |parsed, file|
       @processor.process_routes parsed
     end
@@ -248,9 +271,11 @@ class Brakeman::RailsXSSErubis < ::Erubis::Eruby
   end
 
   def add_text(src, text)
-    if text.include? "\n"
+    if text == "\n"
+      src << "\n"
+    elsif text.include? "\n"
       lines = text.split("\n")
-      if text.match /\n\z/
+      if text.match(/\n\z/)
         lines.each do |line|
           src << "@output_buffer << ('" << escape_text(line) << "'.html_safe!);\n"
         end

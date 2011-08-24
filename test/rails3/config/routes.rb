@@ -1,4 +1,14 @@
 Rails3::Application.routes.draw do
+  get "other/test_locals"
+
+  get "other/test_object"
+
+  get "other/test_collection"
+
+  get "other/test_iteration"
+
+  get "other/test_send_file"
+
   get "home/index"
 
   get "home/test_params"
@@ -80,5 +90,5 @@ Rails3::Application.routes.draw do
 
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  match ':controller(/:action(/:id(.:format)))'
 end

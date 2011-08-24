@@ -1,3 +1,39 @@
+## 0.7.2
+
+ * Fix handling of params and cookies with nested access
+ * Add CVEs for checks added in 0.7.0
+
+## 0.7.1
+
+ * Require BaseProcessor for GemProcessor
+
+## 0.7.0
+
+ * Allow local variable as a class name
+ * Add checks for vulnerabilities fixed in Rails 2.3.14 and 3.0.10
+ * Check for default routes in Rails 3 apps
+ * Look in Gemfile or Gemfile.lock for Rails version
+
+## 0.6.1
+
+ * Fix XSS check for cookies as parameters in output
+ * Don't bother calling super in CheckSessionSettings
+ * Add escape_once as a safe method
+ * Accept '\Z' or '\z' in model validations
+
+## 0.6.0
+
+ * Tests are in place and fully functional
+ * Hide errors by default in HTML output
+ * Warn if routes.rb cannot be found
+ * Narrow methods assumed to be file access
+ * Increase confidence for methods known to not escape output
+ * Fixes to output processing for Erubis
+ * Fixes for Rails 3 XSS checks
+ * Fixes to line numbers with Erubis
+ * Fixes to escaped output scanning
+ * Update CSRF CVE-2011-0447 message to be less assertive
+
 ## 0.5.2
 
  * Output report file name when finished

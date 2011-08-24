@@ -14,7 +14,7 @@ class HomeController < ApplicationController
   end
 
   def test_cookie
-    @name = cookie[:name]
+    @name = cookies[:name]
   end
 
   def test_filter
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
 
   def test_sql some_var = "hello"
     User.find_by_sql "select * from users where something = '#{some_var}'"
-    User.all(:conditions => "status => '#{happy}'")
+    User.all(:conditions => "status = '#{happy}'")
     @user = User.first(:conditions => "name = '#{params[:name]}'")
   end
 
@@ -57,6 +57,11 @@ class HomeController < ApplicationController
   def test_dynamic_render
     page = params[:page]
     render :file => "/some/path/#{page}"
+  end
+
+  def test_load_params
+    load params[:file]
+    RandomClass.load params[:file]
   end
 
   private
