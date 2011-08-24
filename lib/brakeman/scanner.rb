@@ -118,19 +118,9 @@ class Brakeman::Scanner
   #
   #Adds parsed information to tracker.initializers
   def process_initializers
-<<<<<<< HEAD:lib/brakeman/scanner.rb
     Dir.glob(File.join(@path, "config/initializers/**/*.rb")).sort.each do |f|
       process_file f do |parsed, file|
         @processor.process_initializer file, parsed
-=======
-    Dir.glob(@path + "/config/initializers/**/*.rb").sort.each do |f|
-      begin
-        @processor.process_initializer(f, RubyParser.new.parse(File.read(f)))
-      rescue Racc::ParseError => e
-        tracker.error e, "could not parse #{f}. There is probably a typo in the file. Test it with 'ruby_parse #{f}'"
-      rescue Exception => e
-        tracker.error e.exception(e.message + "\nWhile processing #{f}"), e.backtrace
->>>>>>> upstream/master:lib/scanner.rb
       end
     end
   end
