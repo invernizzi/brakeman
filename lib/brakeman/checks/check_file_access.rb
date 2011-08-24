@@ -22,6 +22,9 @@ class Brakeman::CheckFileAccess < Brakeman::BaseCheck
 
     if check = include_user_input?(file_name)
       unless duplicate? call, result[1]
+        require 'rubygems'
+        require 'ruby-debug'
+        debugger
         add_result call, result[1]
 
         if check == :params
