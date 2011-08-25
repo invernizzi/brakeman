@@ -26,7 +26,7 @@ class Brakeman::Processor
 
   #Process Gemfile
   def process_gems src, gem_lock = nil
-    GemProcessor.new(@tracker).process_gems src, gem_lock
+    Brakeman::GemProcessor.new(@tracker).process_gems src, gem_lock
   end
 
   #Process route file source

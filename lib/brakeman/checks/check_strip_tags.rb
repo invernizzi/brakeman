@@ -1,10 +1,10 @@
-require 'checks/base_check'
-require 'processors/lib/find_call'
+require 'brakeman/checks/base_check'
+require 'brakeman/processors/lib/find_call'
 
 #Checks for uses of strip_tags in Rails versions before 2.3.13 and 3.0.10
 #http://groups.google.com/group/rubyonrails-security/browse_thread/thread/2b9130749b74ea12
-class CheckStripTags < BaseCheck
-  Checks.add self
+class Brakeman::CheckStripTags < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     if (version_between?('2.0.0', '2.3.12') or 

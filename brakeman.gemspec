@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brakeman}
-  s.version = "3.9.8"
+  s.version = "3.9.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
-  s.date = %q{2011-08-24}
+  s.date = %q{2011-08-25}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
   s.email = [%q{}, %q{invernizzi.l@gmail.com}]
   s.executables = [%q{brakeman}]
@@ -31,19 +31,24 @@ Gem::Specification.new do |s|
     "lib/brakeman/checks/base_check.rb",
     "lib/brakeman/checks/check_cross_site_scripting.rb",
     "lib/brakeman/checks/check_default_routes.rb",
+    "lib/brakeman/checks/check_escape_function.rb",
     "lib/brakeman/checks/check_evaluation.rb",
     "lib/brakeman/checks/check_execute.rb",
     "lib/brakeman/checks/check_file_access.rb",
+    "lib/brakeman/checks/check_filter_skipping.rb",
     "lib/brakeman/checks/check_forgery_setting.rb",
     "lib/brakeman/checks/check_mail_to.rb",
     "lib/brakeman/checks/check_mass_assignment.rb",
     "lib/brakeman/checks/check_model_attributes.rb",
     "lib/brakeman/checks/check_nested_attributes.rb",
+    "lib/brakeman/checks/check_quote_table_name.rb",
     "lib/brakeman/checks/check_redirect.rb",
     "lib/brakeman/checks/check_render.rb",
+    "lib/brakeman/checks/check_response_splitting.rb",
     "lib/brakeman/checks/check_send_file.rb",
     "lib/brakeman/checks/check_session_settings.rb",
     "lib/brakeman/checks/check_sql.rb",
+    "lib/brakeman/checks/check_strip_tags.rb",
     "lib/brakeman/checks/check_validation_regex.rb",
     "lib/brakeman/format/style.css",
     "lib/brakeman/processor.rb",
@@ -55,6 +60,7 @@ Gem::Specification.new do |s|
     "lib/brakeman/processors/db_processor.rb",
     "lib/brakeman/processors/erb_template_processor.rb",
     "lib/brakeman/processors/erubis_template_processor.rb",
+    "lib/brakeman/processors/gem_processor.rb",
     "lib/brakeman/processors/haml_template_processor.rb",
     "lib/brakeman/processors/lib/find_call.rb",
     "lib/brakeman/processors/lib/find_model_call.rb",
@@ -77,12 +83,6 @@ Gem::Specification.new do |s|
     "lib/brakeman/version.rb",
     "lib/brakeman/warning.rb",
     "lib/brakeman/warning_types.rb",
-    "lib/checks/check_escape_function.rb",
-    "lib/checks/check_filter_skipping.rb",
-    "lib/checks/check_quote_table_name.rb",
-    "lib/checks/check_response_splitting.rb",
-    "lib/checks/check_strip_tags.rb",
-    "lib/processors/gem_processor.rb",
     "lib/tasks/brakeman_tasks.rake",
     "lib/template/brakeman_test.rb"
   ]

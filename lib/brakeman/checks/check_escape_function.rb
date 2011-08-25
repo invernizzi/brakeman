@@ -1,10 +1,10 @@
-require 'checks/base_check'
-require 'processors/lib/find_call'
+require 'brakeman/checks/base_check'
+require 'brakeman/processors/lib/find_call'
 
 #Check for versions with vulnerable html escape method
 #http://groups.google.com/group/rubyonrails-security/browse_thread/thread/56bffb5923ab1195
-class CheckEscapeFunction < BaseCheck
-  Checks.add self
+class Brakeman::CheckEscapeFunction < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     if version_between?('2.0.0', '2.3.13') and RUBY_VERSION < '1.9.0' 

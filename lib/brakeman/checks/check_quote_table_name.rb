@@ -1,10 +1,10 @@
-require 'checks/base_check'
-require 'processors/lib/find_call'
+require 'brakeman/checks/base_check'
+require 'brakeman/processors/lib/find_call'
 
 #Check for uses of quote_table_name in Rails versions before 2.3.13 and 3.0.10
 #http://groups.google.com/group/rubyonrails-security/browse_thread/thread/6a1e473744bc389b
-class CheckQuoteTableName < BaseCheck
-  Checks.add self
+class Brakeman::CheckQuoteTableName < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     if (version_between?('2.0.0', '2.3.13') or 

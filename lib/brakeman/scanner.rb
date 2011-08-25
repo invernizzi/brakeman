@@ -132,6 +132,7 @@ class Brakeman::Scanner
     Dir.glob(@path + "/lib/**/*.rb").sort.each do |f|
       process_file f do |parsed, file|
         @processor.process_lib parsed, file
+      end
     end
   end
 

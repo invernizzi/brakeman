@@ -1,10 +1,10 @@
-require 'checks/base_check'
-require 'processors/lib/find_call'
+require 'brakeman/checks/base_check'
+require 'brakeman/processors/lib/find_call'
 
 #Check for filter skipping vulnerability
 #http://groups.google.com/group/rubyonrails-security/browse_thread/thread/3420ac71aed312d6
-class CheckFilterSkipping < BaseCheck
-  Checks.add self
+class Brakeman::CheckFilterSkipping < Brakeman::BaseCheck
+  Brakeman::Checks.add self
 
   def run_check
     if version_between?('3.0.0', '3.0.9') and uses_arbitrary_actions?
