@@ -32,6 +32,16 @@ scan3.run_checks
 Rails3 = Report.new(scan3).to_test
 
 $stderr.puts "-" * 40
+$stderr.puts "Processing Rails 3.1 application..."
+$stderr.puts "-" * 40
+OPTIONS[:app_path] = File.expand_path "./rails3.1"
+OPTIONS[:rails3] = true
+load 'processors/route_processor.rb'
+scan31 = Scanner.new("rails3.1").process
+scan31.run_checks
+Rails31 = Report.new(scan31).to_test
+
+$stderr.puts "-" * 40
 $stderr.puts "Checking results..."
 $stderr.puts "-" * 40
 require 'test/unit'
@@ -467,7 +477,7 @@ class Rails3Tests < Test::Unit::TestCase
   def test_file_access_load
     assert_warning :type => :warning,
       :warning_type => "File Access",
-      :line => 64,
+      :line => 68,
       :message => /^Parameter value used in file name near l/,
       :confidence => 0,
       :file => /home_controller\.rb/
@@ -494,8 +504,8 @@ class Rails3Tests < Test::Unit::TestCase
   def test_render_path
     assert_warning :type => :warning,
       :warning_type => "Dynamic Render Path",
-      :line => 60,
-      :message => /^Render path is dynamic near line 60: ren/,
+      :line => 64,
+      :message => /^Render path is dynamic near line 64: ren/,
       :confidence => 0,
       :file => /home_controller\.rb/
   end
@@ -781,6 +791,51 @@ class Rails3Tests < Test::Unit::TestCase
       :line => 93,
       :message => /All public methods in controllers are available as actions/,
       :file => /routes\.rb/
+  end
+
+  def test_user_input_in_mass_assignment
+    assert_warning :warning_type => "Mass Assignment",
+      :line => 58,
+      :message => /^Unprotected mass assignment/,
+      :confidence => 1,
+      :file => /home_controller\.rb/
+  end
+end
+
+class Rails31Tests < Test::Unit::TestCase
+  include FindWarning
+  
+  def report
+    Rails31
+  end
+
+  def test_without_protection
+    assert_warning :type => :warning,
+      :warning_type => "Mass Assignment",
+      :line => 47,
+      :message => /^Unprotected mass assignment/,
+      :confidence => 0,
+      :file => /users_controller\.rb/ 
+  end
+
+  def test_unprotected_redirect
+    assert_warning :type => :warning,
+      :warning_type => "Redirect",
+      :line => 67,
+      :message => /^Possible unprotected redirect/,
+      :confidence => 2,
+      :file => /users_controller\.rb/ 
+  end
+
+  #Such as
+  #http_basic_authenticate_with :name => "dhh", :password => "secret"
+  def test_basic_auth_with_password
+    assert_warning :type => :controller,
+      :warning_type => "Basic Auth",
+      :line => 6,
+      :message => /^Basic authentication password stored in source code/,
+      :confidence => 0,
+      :file => /users_controller\.rb/ 
   end
 end
 

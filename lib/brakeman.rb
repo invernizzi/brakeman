@@ -1,6 +1,14 @@
+require 'yaml'
+
 OPTIONS = {}
 
 module Brakeman
+  def self.run options
+    if options[:list_checks]
+      list_checks
+      exit
+    end
+  end
 
   #loads the saved options and runs the scan
   def self.main(options_from_cli={}, cli_mode=false)
@@ -87,8 +95,8 @@ module Brakeman
     end
 
     #Set output format
-    if OPTIONS[:output_format]
-      case OPTIONS[:output_format]
+    if options[:output_format]
+      case options[:output_format]
       when :html, :to_html
         OPTIONS[:output_format] = :to_html
       when :csv, :to_csv
@@ -101,7 +109,7 @@ module Brakeman
         OPTIONS[:output_format] = :to_s
       end
     else
-      case OPTIONS[:output_file]
+      case options[:output_file]
       when /\.html$/i
         OPTIONS[:output_format] = :to_html
       when /\.csv$/i

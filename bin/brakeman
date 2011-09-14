@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
-require "optparse"
+require 'optparse'
 require 'set'
-require 'yaml'
 
 $:.unshift "#{File.expand_path(File.dirname(__FILE__))}/../lib"
 
@@ -11,14 +10,6 @@ require 'brakeman'
 trap("INT") do
   $stderr.puts "\nInterrupted - exiting."
   exit!
-end
-
-def list_checks
-  require 'scanner'
-  $stderr.puts "Available Checks:"
-  $stderr.puts "-" * 30
-  $stderr.puts Checks.checks.map { |c| c.to_s }.sort.join "\n"
-  exit
 end
 
 #Parse command line options
@@ -150,4 +141,3 @@ OptionParser.new do |opts|
 end.parse!(ARGV)
 
 Brakeman.main(options, :cli_mode=>true)
-

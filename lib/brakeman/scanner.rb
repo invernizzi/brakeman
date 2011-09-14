@@ -6,10 +6,16 @@ begin
   require 'erb'
   require 'erubis'
   require 'brakeman/processor'
+  #Load our own version of ruby_parser :(
+  original_verbosity = $VERBOSE
+  $VERBOSE = nil
+  require 'ruby_parser/ruby_parser.rb'
+  $VERBOSE = original_verbosity
+
   require 'brakeman/blessing'
-Dir.glob("processors/*.rb").each do |f|
-  require File.join("brakeman", f.match(/processors.*/)[0])
-end
+  Dir.glob("processors/*.rb").each do |f|
+    require File.join("brakeman", f.match(/processors.*/)[0])
+  end
 rescue LoadError => e
   $stderr.puts e.message
   $stderr.puts "Please install the appropriate dependency."

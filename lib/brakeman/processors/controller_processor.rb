@@ -59,7 +59,7 @@ class Brakeman::ControllerProcessor < Brakeman::BaseProcessor
 
     #Methods called inside class definition
     #like attr_* and other settings
-    if @current_method.nil? and target.nil?
+    if @current_method.nil? and target.nil? and @controller
       if args.length == 1 #actually, empty
         case method
         when :private, :protected, :public
@@ -90,9 +90,13 @@ class Brakeman::ControllerProcessor < Brakeman::BaseProcessor
             #layout :false or layout nil
             @controller[:layout] = false
           end
+        else
+          @controller[:options][method] ||= []
+          @controller[:options][method] << exp
         end
       end
-      ignore
+
+      exp
     elsif target == nil and method == :render
       make_render exp
     elsif exp == FORMAT_HTML and context[1] != :iter 

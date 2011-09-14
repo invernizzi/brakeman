@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{brakeman}
-  s.version = "3.9.9"
+  s.version = "3.10.9"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = [%q{Justin Collins}, %q{Luca Invernizzi}]
-  s.date = %q{2011-08-25}
+  s.date = %q{2011-09-14}
   s.description = %q{Brakeman detects security vulnerabilities in Ruby on Rails applications via static analysis.}
   s.email = [%q{}, %q{invernizzi.l@gmail.com}]
   s.executables = [%q{brakeman}]
@@ -29,6 +29,7 @@ Gem::Specification.new do |s|
     "lib/brakeman/blessing.rb",
     "lib/brakeman/checks.rb",
     "lib/brakeman/checks/base_check.rb",
+    "lib/brakeman/checks/check_basic_auth.rb",
     "lib/brakeman/checks/check_cross_site_scripting.rb",
     "lib/brakeman/checks/check_default_routes.rb",
     "lib/brakeman/checks/check_escape_function.rb",
@@ -50,6 +51,7 @@ Gem::Specification.new do |s|
     "lib/brakeman/checks/check_sql.rb",
     "lib/brakeman/checks/check_strip_tags.rb",
     "lib/brakeman/checks/check_validation_regex.rb",
+    "lib/brakeman/checks/check_without_protection.rb",
     "lib/brakeman/format/style.css",
     "lib/brakeman/processor.rb",
     "lib/brakeman/processors/alias_processor.rb",
@@ -83,6 +85,8 @@ Gem::Specification.new do |s|
     "lib/brakeman/version.rb",
     "lib/brakeman/warning.rb",
     "lib/brakeman/warning_types.rb",
+    "lib/ruby_parser/ruby_lexer.rb",
+    "lib/ruby_parser/ruby_parser.rb",
     "lib/tasks/brakeman_tasks.rake",
     "lib/template/brakeman_test.rb"
   ]
@@ -123,6 +127,31 @@ Gem::Specification.new do |s|
     "test/rails2/test/unit/helpers/home_helper_test.rb",
     "test/rails2/test/unit/helpers/other_helper_test.rb",
     "test/rails2/test/unit/user_test.rb",
+    "test/rails3.1/app/controllers/application_controller.rb",
+    "test/rails3.1/app/controllers/users_controller.rb",
+    "test/rails3.1/app/helpers/application_helper.rb",
+    "test/rails3.1/app/helpers/users_helper.rb",
+    "test/rails3.1/app/models/user.rb",
+    "test/rails3.1/config/application.rb",
+    "test/rails3.1/config/boot.rb",
+    "test/rails3.1/config/environment.rb",
+    "test/rails3.1/config/environments/development.rb",
+    "test/rails3.1/config/environments/production.rb",
+    "test/rails3.1/config/environments/test.rb",
+    "test/rails3.1/config/initializers/backtrace_silencers.rb",
+    "test/rails3.1/config/initializers/inflections.rb",
+    "test/rails3.1/config/initializers/mime_types.rb",
+    "test/rails3.1/config/initializers/secret_token.rb",
+    "test/rails3.1/config/initializers/session_store.rb",
+    "test/rails3.1/config/initializers/wrap_parameters.rb",
+    "test/rails3.1/config/routes.rb",
+    "test/rails3.1/db/migrate/20110908172338_create_users.rb",
+    "test/rails3.1/db/seeds.rb",
+    "test/rails3.1/test/functional/users_controller_test.rb",
+    "test/rails3.1/test/performance/browsing_test.rb",
+    "test/rails3.1/test/test_helper.rb",
+    "test/rails3.1/test/unit/helpers/users_helper_test.rb",
+    "test/rails3.1/test/unit/user_test.rb",
     "test/rails3/app/controllers/application_controller.rb",
     "test/rails3/app/controllers/home_controller.rb",
     "test/rails3/app/controllers/other_controller.rb",

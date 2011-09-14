@@ -42,7 +42,7 @@ class Brakeman::CheckMassAssignment < Brakeman::BaseCheck
     if check and not @results.include? call
       @results << call
 
-      if include_user_input? call[3]
+      if include_user_input? call[3] and not hash? call[3][1]
         confidence = CONFIDENCE[:high]
       else
         confidence = CONFIDENCE[:med]
@@ -55,6 +55,7 @@ class Brakeman::CheckMassAssignment < Brakeman::BaseCheck
         :code => call, 
         :confidence => confidence
     end
+
     res
   end
 
@@ -63,8 +64,7 @@ class Brakeman::CheckMassAssignment < Brakeman::BaseCheck
     args = process call[3]
     if args.length <= 1 #empty new()
       false
-    elsif hash? args[1]
-      #Still should probably check contents of hash
+    elsif hash? args[1] and not include_user_input? args[1]
       false
     else
       current_model = tracker.models[call[1][1]]
